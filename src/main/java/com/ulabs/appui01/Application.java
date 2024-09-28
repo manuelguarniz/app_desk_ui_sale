@@ -9,6 +9,7 @@ import com.ulabs.appui01.lib.router.EventManager;
 import com.ulabs.appui01.lib.router.Router;
 import com.ulabs.appui01.ui.UILogin;
 import com.ulabs.appui01.ui.UIMain;
+import com.ulabs.appui01.ui.UIMainDeprecated;
 
 /**
  *
@@ -50,10 +51,17 @@ public class Application {
                 UIMain main = new UIMain();
                 main.setLocationRelativeTo(null);
                 main.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+                
+                
+                UIMainDeprecated mainDeprecated = new UIMainDeprecated();
+                mainDeprecated.setLocationRelativeTo(null);
+                mainDeprecated.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         
                 Router.route().events.subscribe("login", login);
                 Router.route().events.subscribe("main", main);
+                Router.route().events.subscribe("mainDeprecated", mainDeprecated);
                 
+//                Router.route().on("login", "open");
                 Router.route().on("main", "open");
             }
         });

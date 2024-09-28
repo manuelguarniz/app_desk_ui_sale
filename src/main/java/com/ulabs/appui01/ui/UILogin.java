@@ -31,6 +31,7 @@ public class UILogin extends javax.swing.JFrame implements EventListener {
         char[] password = txtPassword.getPassword();
         if (txtUser.getText() != null && password.length > 0) {
             Router.route().on("main", "open");
+//            Router.route().on("mainDeprecated", "open");
             Router.route().on("login", "close");
         }
     }
