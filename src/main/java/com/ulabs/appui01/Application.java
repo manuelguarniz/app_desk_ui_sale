@@ -5,7 +5,6 @@
  */
 package com.ulabs.appui01;
 
-import com.ulabs.appui01.lib.router.EventManager;
 import com.ulabs.appui01.lib.router.Router;
 import com.ulabs.appui01.ui.UILogin;
 import com.ulabs.appui01.ui.UIMain;

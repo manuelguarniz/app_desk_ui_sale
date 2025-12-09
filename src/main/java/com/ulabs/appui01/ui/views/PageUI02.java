@@ -9,12 +9,12 @@ package com.ulabs.appui01.ui.views;
  *
  * @author manuelguarniz
  */
-public class Page02 extends javax.swing.JPanel {
+public class PageUI02 extends javax.swing.JPanel {
 
     /**
      * Creates new form Page02
      */
-    public Page02() {
+    public PageUI02() {
         initComponents();
     }
 
@@ -31,8 +31,10 @@ public class Page02 extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1080, 680));
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1080, 680));
 
         jLabel1.setText("Page02");
 
@@ -43,7 +45,7 @@ public class Page02 extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(162, 162, 162)
                 .addComponent(jLabel1)
-                .addContainerGap(863, Short.MAX_VALUE))
+                .addContainerGap(873, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

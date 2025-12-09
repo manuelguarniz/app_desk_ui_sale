@@ -7,7 +7,6 @@ package com.ulabs.appui01.ui;
 
 import com.ulabs.appui01.lib.router.Router;
 import com.ulabs.appui01.lib.router.EventListener;
-import javax.swing.JFrame;
 
 /**
  *

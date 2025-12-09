@@ -5,10 +5,19 @@
  */
 package com.ulabs.appui01.ui;
 
+import static com.ulabs.appui01.common.Constant.DISPLAY_CONTENT_HEIGHT;
+import static com.ulabs.appui01.common.Constant.DISPLAY_CONTENT_WIDTH;
+import static com.ulabs.appui01.common.Constant.DISPLAY_MENU_HEIGHT;
+import static com.ulabs.appui01.common.Constant.DISPLAY_MENU_WIDTH;
+import static com.ulabs.appui01.common.Constant.DISPLAY_TOP_HEIGHT;
+import static com.ulabs.appui01.common.Constant.DISPLAY_TOP_WIDTH;
 import com.ulabs.appui01.lib.router.EventListener;
-import com.ulabs.appui01.ui.views.Page01;
-import com.ulabs.appui01.ui.views.Page02;
+import com.ulabs.appui01.ui.views.PageUI01;
+import com.ulabs.appui01.ui.views.PageUI02;
 import java.awt.BorderLayout;
+import static com.ulabs.appui01.common.Constant.DISPLAY_SCREEN_HEIGHT;
+import com.ulabs.appui01.lib.router.Router;
+import com.ulabs.appui01.ui.components.viewProfile.ViewUIProfile;
 
 /**
  *
@@ -23,21 +32,37 @@ public class UIMain extends javax.swing.JFrame implements EventListener {
     public UIMain() {
         initComponents();
         resizing();
+        showPage01();
+        initialize();
+    }
+    
+    private void initialize() {
+        ViewUIProfile vprofile = new ViewUIProfile();
+        vprofile.setSize(ViewUIProfile.WIDTH, ViewUIProfile.HEIGHT);
+        vprofile.setLocation(0, 0);
+        
+        Router.route().events.subscribe("view-ui-profile", vprofile);
+        
+        pnlProfile.removeAll();
+        pnlProfile.add(vprofile, BorderLayout.PAGE_START);
+        pnlProfile.revalidate();
+        pnlProfile.repaint();
     }
     
     private void resizing() {
-        UIMain main = this;
-        pnlMain.setSize(1080, 780);
-        pnlTitle.setSize(1080, 100);
-        pnlContent.setSize(1080, 680);
+//        pnlMain.setSize(DISPLAY_TOP_WIDTH, DISPLAY_SCREEN_HEIGHT);
+//        pnlMenu.setSize(DISPLAY_MENU_WIDTH, DISPLAY_MENU_HEIGHT);
+//        pnlTitle.setSize(DISPLAY_TOP_WIDTH, DISPLAY_TOP_HEIGHT);
+//        pnlContent.setSize(DISPLAY_CONTENT_WIDTH, DISPLAY_CONTENT_HEIGHT);
+//        btnColapse.setVisible(false);
     }
     
     private void collapse() {
         if (!statusCollapseMenu) {
-            pnlMenu.setSize(65, 780);
+            pnlMenu.setSize(65, DISPLAY_SCREEN_HEIGHT);
             statusCollapseMenu = true;
         } else {
-            pnlMenu.setSize(200, 780);
+            pnlMenu.setSize(200, DISPLAY_SCREEN_HEIGHT);
             statusCollapseMenu = false;
         }
     }
@@ -47,8 +72,8 @@ public class UIMain extends javax.swing.JFrame implements EventListener {
     }
     
     private void showPage01() {
-        Page01 page01 =new Page01();
-        page01.setSize(1080, 680);
+        PageUI01 page01 =new PageUI01();
+        page01.setSize(DISPLAY_CONTENT_WIDTH, DISPLAY_CONTENT_HEIGHT);
         page01.setLocation(0, 0);
         
         pnlContent.removeAll();
@@ -58,8 +83,8 @@ public class UIMain extends javax.swing.JFrame implements EventListener {
     }
     
     private void showPage02() {
-        Page02 page02 =new Page02();
-        page02.setSize(1080, 680);
+        PageUI02 page02 =new PageUI02();
+        page02.setSize(DISPLAY_CONTENT_WIDTH, DISPLAY_CONTENT_HEIGHT);
         page02.setLocation(0, 0);
         
         pnlContent.removeAll();
@@ -92,6 +117,7 @@ public class UIMain extends javax.swing.JFrame implements EventListener {
         btnColapse = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        pnlProfile = new javax.swing.JPanel();
         pnlMain = new javax.swing.JPanel();
         pnlTitle = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -101,10 +127,12 @@ public class UIMain extends javax.swing.JFrame implements EventListener {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1280, 720));
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlMenu.setBackground(new java.awt.Color(51, 153, 255));
         pnlMenu.setMaximumSize(new java.awt.Dimension(200, 32767));
+        pnlMenu.setPreferredSize(new java.awt.Dimension(200, 720));
 
         btnExit.setText("Salir");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -134,40 +162,59 @@ public class UIMain extends javax.swing.JFrame implements EventListener {
             }
         });
 
+        pnlProfile.setBackground(new java.awt.Color(255, 255, 204));
+
+        javax.swing.GroupLayout pnlProfileLayout = new javax.swing.GroupLayout(pnlProfile);
+        pnlProfile.setLayout(pnlProfileLayout);
+        pnlProfileLayout.setHorizontalGroup(
+            pnlProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnlProfileLayout.setVerticalGroup(
+            pnlProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 65, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnlMenuLayout = new javax.swing.GroupLayout(pnlMenu);
         pnlMenu.setLayout(pnlMenuLayout);
         pnlMenuLayout.setHorizontalGroup(
             pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMenuLayout.createSequentialGroup()
-                .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
-                    .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlMenuLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnExit)
-                                .addComponent(btnColapse, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(pnlMenuLayout.createSequentialGroup()
-                            .addGap(16, 16, 16)
-                            .addComponent(jButton1))))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnExit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlMenuLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnlProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(pnlMenuLayout.createSequentialGroup()
+                                .addComponent(btnColapse, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         pnlMenuLayout.setVerticalGroup(
             pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnColapse)
-                .addGap(60, 60, 60)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 532, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 515, Short.MAX_VALUE)
                 .addComponent(btnExit))
         );
 
-        getContentPane().add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 720));
+        getContentPane().add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pnlMain.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMain.setPreferredSize(new java.awt.Dimension(1080, 720));
+        pnlMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlTitle.setPreferredSize(new java.awt.Dimension(1080, 50));
 
         jLabel1.setText("Menu 1");
 
@@ -178,7 +225,7 @@ public class UIMain extends javax.swing.JFrame implements EventListener {
             .addGroup(pnlTitleLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1028, Short.MAX_VALUE))
         );
         pnlTitleLayout.setVerticalGroup(
             pnlTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,7 +235,10 @@ public class UIMain extends javax.swing.JFrame implements EventListener {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        pnlContent.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMain.add(pnlTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        pnlContent.setBackground(new java.awt.Color(255, 102, 102));
+        pnlContent.setPreferredSize(new java.awt.Dimension(1080, 680));
 
         jLabel2.setText("Content 1");
 
@@ -199,32 +249,19 @@ public class UIMain extends javax.swing.JFrame implements EventListener {
             .addGroup(pnlContentLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(1042, Short.MAX_VALUE))
+                .addContainerGap(1012, Short.MAX_VALUE))
         );
         pnlContentLayout.setVerticalGroup(
             pnlContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContentLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(642, Short.MAX_VALUE))
+                .addContainerGap(658, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
-        pnlMain.setLayout(pnlMainLayout);
-        pnlMainLayout.setHorizontalGroup(
-            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        pnlMainLayout.setVerticalGroup(
-            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
-                .addComponent(pnlTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        pnlMain.add(pnlContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, -1, -1));
 
-        getContentPane().add(pnlMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 1110, 720));
+        getContentPane().add(pnlMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -252,10 +289,10 @@ public class UIMain extends javax.swing.JFrame implements EventListener {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel pnlContent;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlMenu;
+    private javax.swing.JPanel pnlProfile;
     private javax.swing.JPanel pnlTitle;
     // End of variables declaration//GEN-END:variables
 
